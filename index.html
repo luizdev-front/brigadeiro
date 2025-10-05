@@ -1,362 +1,497 @@
-<<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brigadeiros da Maria</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pastelaria do Fumaça — Lanches & Delivery | Guarujá, SP</title>
+  <meta name="description" content="Pastelaria do Fumaça — Pastéis, Hambúrgueres, Açaí e Milk-Shake. Delivery em Guarujá. Peça online ou pelo telefone 13 99603-9919." />
+  <link rel="canonical" href="https://lanches-do-fumaca.vercel.app/" />
+  <meta name="robots" content="index, follow" />
 
-  <!-- Fonte moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Pastelaria do Fumaça — Lanches & Delivery" />
+  <meta property="og:description" content="Pastéis, hamburgueres e bebidas. Delivery em Guarujá. Peça online ou pelo telefone 13 99603-9919." />
+  <meta property="og:url" content="https://lanches-do-fumaca.vercel.app/" />
+  <!-- Substitua por URL real da imagem de compartilhamento -->
+  <meta property="og:image" content="/images/og-image.jpg" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#a61c00" />
+
+  <!-- Structured data (LocalBusiness) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "name": "Pastelaria do Fumaça",
+    "telephone": "+55 13 99603-9919",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "R. Luís Custódio do Vale, 725",
+      "addressLocality": "Guarujá",
+      "addressRegion": "SP",
+      "postalCode": "11444-680",
+      "addressCountry": "BR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "18:00",
+        "closes": "01:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday","Sunday"],
+        "opens": "19:00",
+        "closes": "02:00"
+      }
+    ],
+    "url": "https://lanches-do-fumaca.vercel.app/"
+  }
+  </script>
 
   <style>
-    :root {
-      --choco: #3e1f0d;
-      --gold: #f8d57e;
-      --bg-light: #fff9f4;
-      --bg-dark: rgba(62, 31, 13, 0.9);
-      --shadow: rgba(0, 0, 0, 0.2);
+    /* ========= Reset simples & variáveis ========= */
+    :root{
+      --brand:#a61c00;
+      --accent:#ffb84d;
+      --bg:#fff;
+      --muted:#666;
+      --card-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body,#app{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      font-size:16px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    /* ========= Layout ========= */
+    a{color:inherit;text-decoration:none}
+    .skip-link{
+      position:absolute;
+      left:-999px;
+      top:auto;
+      width:1px;height:1px;overflow:hidden;
+    }
+    .skip-link:focus{
+      left:8px;top:8px;width:auto;height:auto;padding:8px 12px;background:#000;color:#fff;z-index:9999;border-radius:4px;
     }
 
-    html {
-      scroll-behavior: smooth;
+    header{
+      border-bottom:1px solid #eee;
+      background:linear-gradient(90deg,var(--brand),#c23b1a);
+      color:#fff;padding:12px 16px;
+    }
+    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
+
+    .topbar{display:flex;align-items:center;gap:16px;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand svg{width:48px;height:48px}
+    nav ul{display:flex;gap:12px;list-style:none;padding:0;margin:0}
+    nav a{padding:8px 10px;border-radius:6px}
+    nav a[aria-current="page"]{background:rgba(255,255,255,0.12)}
+
+    main{padding:20px 0}
+    .hero{display:grid;gap:14px;grid-template-columns:1fr;align-items:center}
+    @media(min-width:840px){ .hero{grid-template-columns:1fr 360px} }
+
+    .card{background:#fff;border-radius:12px;padding:16px;box-shadow:var(--card-shadow)}
+    .hero-info h1{margin:0;font-size:clamp(20px,3.6vw,28px)}
+    .meta{color:var(--muted);font-size:0.95rem;margin-top:8px}
+
+    /* menu grid */
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+    .controls button{background:#fff;border:1px solid #eee;padding:8px 10px;border-radius:8px;cursor:pointer}
+    .products-grid{
+      display:grid;
+      gap:12px;
+      grid-template-columns:repeat(2,1fr);
+    }
+    @media(min-width:640px){ .products-grid{grid-template-columns:repeat(3,1fr)} }
+    @media(min-width:980px){ .products-grid{grid-template-columns:repeat(4,1fr)} }
+
+    .product{
+      background:#fff;border-radius:10px;padding:10px;border:1px solid #f3f3f3;display:flex;flex-direction:column;gap:10px;
+    }
+    .product .img{
+      border-radius:8px;height:140px;display:flex;align-items:center;justify-content:center;background:#f7f7f7;
+    }
+    .product h3{margin:0;font-size:1rem}
+    .product p{margin:0;color:var(--muted);font-size:0.9rem}
+    .product .price{font-weight:700;margin-top:auto}
+
+    .product button{
+      margin-top:8px;background:var(--brand);color:#fff;border:0;padding:8px;border-radius:8px;cursor:pointer;
     }
 
-    body {
-      background: var(--bg-light);
-      color: var(--choco);
-      overflow-x: hidden;
-    }
+    /* cart */
+    .cart-btn{position:relative}
+    .cart-count{position:absolute;right:-6px;top:-6px;background:var(--accent);color:#000;border-radius:50%;padding:4px 7px;font-weight:700;font-size:0.85rem}
 
-    /* ---------- HEADER ---------- */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 2px 10px var(--shadow);
-      padding: 15px 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      animation: slideDown 0.8s ease;
+    aside.cart-panel{
+      position:fixed;right:16px;bottom:16px;width:320px;max-width:90vw;border-radius:12px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);background:#fff;z-index:999;
     }
+    .cart-items{max-height:320px;overflow:auto}
+    .cart-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f2}
+    .cart-item .meta{font-size:0.9rem}
+    .cart-actions{display:flex;gap:8px;justify-content:space-between;margin-top:12px}
 
-    header h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--choco);
-      letter-spacing: 1px;
-    }
+    footer{padding:18px 0;margin-top:18px;border-top:1px solid #eee;color:var(--muted)}
+    small.block{display:block;margin-top:6px}
 
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: var(--choco);
-      font-weight: 600;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 3px;
-      background: var(--gold);
-      left: 0;
-      bottom: -6px;
-      border-radius: 5px;
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* ---------- HERO ---------- */
-    .hero {
-      height: 100vh;
-      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.5)), 
-                  url("https://images.unsplash.com/photo-1617196038435-cda9a6c2e5d1") center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      padding: 0 20px;
-    }
-
-    .hero h2 {
-      font-size: 3.2rem;
-      margin-bottom: 20px;
-      text-shadow: 0 4px 12px var(--shadow);
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 25px;
-      animation: fadeInUp 1.4s ease forwards;
-    }
-
-    .hero button {
-      padding: 14px 32px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      background: var(--gold);
-      color: var(--choco);
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 6px 20px var(--shadow);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .hero button:hover {
-      transform: translateY(-4px) scale(1.05);
-      background: #ffd65c;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---------- SECTIONS ---------- */
-    section {
-      padding: 100px 10%;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      color: var(--choco);
-      position: relative;
-      display: inline-block;
-    }
-
-    section h2::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: var(--gold);
-      border-radius: 10px;
-    }
-
-    /* ---------- SOBRE ---------- */
-    .sobre p {
-      max-width: 750px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #5a3b25;
-    }
-
-    /* ---------- PRODUTOS ---------- */
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(10px);
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px var(--shadow);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      perspective: 1000px;
-    }
-
-    .card:hover {
-      transform: translateY(-10px) rotateX(4deg) rotateY(-3deg);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 15px;
-      margin-bottom: 15px;
-      transition: transform 0.4s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.08);
-    }
-
-    .card h3 {
-      margin-bottom: 12px;
-      color: var(--choco);
-    }
-
-    /* ---------- CONTATO ---------- */
-    form {
-      max-width: 520px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(12px);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px var(--shadow);
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    form input, form textarea {
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      outline: none;
-      font-size: 1rem;
-      background: #fdf7ef;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-
-    form input:focus, form textarea:focus {
-      background: #fff;
-      box-shadow: 0 0 0 3px var(--gold);
-    }
-
-    form button {
-      padding: 14px;
-      background: var(--gold);
-      color: var(--choco);
-      border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    form button:hover {
-      background: #ffd65c;
-      transform: translateY(-3px);
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      background: var(--choco);
-      color: #fff;
-      text-align: center;
-      padding: 25px;
-      margin-top: 60px;
-      letter-spacing: 0.5px;
-    }
-
-    /* ---------- RESPONSIVIDADE ---------- */
-    @media (max-width: 768px) {
-      header {
-        padding: 15px 20px;
-      }
-      .hero h2 {
-        font-size: 2.3rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
-      section {
-        padding: 70px 7%;
-      }
-    }
+    /* micro-a11y */
+    [role="status"]{position:relative}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
   <header>
-    <h1>Brigadeiros da Maria</h1>
-    <nav>
-      <a href="#sobre">Sobre</a>
-      <a href="#produtos">Produtos</a>
-      <a href="#contato">Contato</a>
-    </nav>
+    <div class="container topbar" role="banner">
+      <div class="brand">
+        <!-- Logo SVG (inline para performance) -->
+        <svg role="img" aria-label="Logotipo Pastelaria do Fumaça" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <rect rx="10" width="64" height="64" fill="#fff" opacity="0.06"></rect>
+          <g fill="#fff">
+            <path d="M12 44c3-3 10-4 12-12 2-8 0-14 10-14 6 0 12 6 12 12 0 10-10 12-12 18-1 3 0 6-6 6s-16-7-16-10z"></path>
+          </g>
+        </svg>
+        <div>
+          <div style="font-weight:700">Pastelaria do Fumaça</div>
+          <div style="font-size:0.85rem;color: rgba(255,255,255,0.9)">Delivery | Guarujá - SP</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="#inicio" aria-current="page">Início</a></li>
+          <li><a href="#pastel">Pastel</a></li>
+          <li><a href="#hamburguer">Hambúrguer</a></li>
+          <li><a href="#bebidas">Sucos e refrigerantes</a></li>
+          <li><a href="#acai">Açaí e Milk-shake</a></li>
+          <li>
+            <button class="cart-btn" id="open-cart" aria-controls="cart-panel" aria-expanded="false" title="Abrir carrinho">
+              Carrinho <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <div>
-      <h2>Os Brigadeiros Mais Irresistíveis</h2>
-      <p>Feitos com amor, técnica e o melhor chocolate.</p>
-      <button onclick="scrollToSection('produtos')">Ver Produtos</button>
+  <main id="main" class="container" role="main">
+    <section class="hero" aria-label="Informações do estabelecimento">
+      <div class="card hero-info">
+        <h1>BEM-VINDO À PASTELARIA DO FUMAÇA!</h1>
+        <p class="meta">Aberto segunda a sexta 18:00 às 01:30 — Final de semana 19:00 às 02:00</p>
+        <p class="meta">Telefone: <a href="tel:+5513996039919">13 99603-9919</a></p>
+        <p class="meta">Endereço: R. Luís Custódio do Vale, 725 - Guarujá - SP</p>
+
+        <div style="margin-top:12px">
+          <a href="#products" class="card" style="display:inline-block;background:var(--brand);color:#fff;padding:10px 14px;border-radius:8px">Peça agora</a>
+        </div>
+
+        <div style="margin-top:14px">
+          <strong>Tempo estimado de entrega:</strong>
+          <div class="meta">30 a 60 min</div>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="Horário e informações rápidas">
+        <h2 style="margin:0 0 8px 0">Informações rápidas</h2>
+        <p class="meta">Atendimento rápido — peça pelo telefone ou online. Verifique horário de fechamento no final de semana.</p>
+        <small class="block">Formas de pagamento: Dinheiro, Cartão (no local) — integrar online depois.</small>
+      </aside>
+    </section>
+
+    <!-- ======= CONTROLES E PRODUTOS ======= -->
+    <section id="products" aria-labelledby="produtos-title" style="margin-top:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <h2 id="produtos-title">Cardápio</h2>
+        <div role="status" aria-live="polite" id="announce" style="font-size:0.9rem;color:var(--muted)"> </div>
+      </div>
+
+      <div class="controls" role="toolbar" aria-label="Filtrar categorias">
+        <button data-filter="all" class="filter-btn">Todos</button>
+        <button data-filter="Pastel" class="filter-btn">Pastel</button>
+        <button data-filter="Hambúrguer" class="filter-btn">Hambúrguer</button>
+        <button data-filter="Bebida" class="filter-btn">Sucos & Refrigerantes</button>
+        <button data-filter="Açaí" class="filter-btn">Açaí & Milk-Shake</button>
+      </div>
+
+      <div class="products-grid" id="products-grid" aria-live="polite" aria-atomic="true">
+        <!-- Produtos injetados por JS -->
+      </div>
+    </section>
+
+    <footer class="container" role="contentinfo">
+      <div class="card" style="margin-top:14px">
+        <strong>Contato</strong>
+        <small class="block">Telefone: <a href="tel:+5513996039919">13 99603-9919</a></small>
+        <small class="block">Endereço: R. Luís Custódio do Vale, 725 - Guarujá - SP</small>
+        <small class="block">Horário: Seg–Sex 18:00–01:30 • Sáb–Dom 19:00–02:00</small>
+      </div>
+
+      <div style="margin-top:10px;color:var(--muted);font-size:0.9rem">
+        © <span id="year"></span> Pastelaria do Fumaça — Desenvolvido para entrega rápida.
+      </div>
+    </footer>
+  </main>
+
+  <!-- Cart panel (inicialmente oculto) -->
+  <aside id="cart-panel" class="cart-panel" aria-hidden="true" hidden>
+    <h3>Carrinho</h3>
+    <div class="cart-items" id="cart-items" aria-live="polite"></div>
+    <div class="cart-actions">
+      <div><strong>Total:</strong> R$ <span id="cart-total">0.00</span></div>
+      <div style="display:flex;gap:8px">
+        <button id="clear-cart" style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;background:#fff">Limpar</button>
+        <button id="checkout" style="padding:8px 12px;border-radius:8px;background:var(--brand);color:#fff">Finalizar</button>
+      </div>
     </div>
-  </section>
-
-  <section id="sobre" class="sobre">
-    <h2>Sobre Mim</h2>
-    <p>Sou Maria, apaixonada por confeitaria e especialista em brigadeiros gourmet.  
-       Cada receita é preparada com ingredientes selecionados e técnicas modernas, garantindo sabor e sofisticação em cada mordida.</p>
-  </section>
-
-  <section id="produtos">
-    <h2>Nossos Produtos</h2>
-    <div class="produtos">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1617196038435-cda9a6c2e5d1" alt="Brigadeiro Tradicional">
-        <h3>Brigadeiro Tradicional</h3>
-        <p>O clássico que nunca sai de moda, com sabor intenso de chocolate.</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599785209790-43ef6b4e5ed7" alt="Brigadeiro Gourmet">
-        <h3>Brigadeiro Gourmet</h3>
-        <p>Toque refinado, ingredientes nobres e apresentação impecável.</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1619566636858-8578f9e72501" alt="Caixa de Brigadeiros">
-        <h3>Caixas Personalizadas</h3>
-        <p>Monte sua caixa exclusiva para presentear ou celebrar.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <form id="formContato">
-      <input type="text" id="nome" placeholder="Seu nome" required>
-      <input type="email" id="email" placeholder="Seu e-mail" required>
-      <textarea id="mensagem" rows="4" placeholder="Sua mensagem" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Brigadeiros da Maria - Todos os direitos reservados</p>
-  </footer>
+  </aside>
 
   <script>
-    // Scroll suave
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    /* ========= Dados iniciais - substituir por backend quando existir ========= */
+    const PRODUCTS = [
+      {id: 'p1', category:'Pastel', name:'Pastel de Carne', description:'Carne moída temperada', price: 8.50},
+      {id: 'p2', category:'Pastel', name:'Pastel de Queijo', description:'Queijo muçarela', price: 7.50},
+      {id: 'h1', category:'Hambúrguer', name:'X-Burger Tradicional', description:'Pão, hambúrguer 150g, queijo, alface', price: 18.00},
+      {id: 'h2', category:'Hambúrguer', name:'X-Bacon', description:'Com bacon crocante', price: 22.00},
+      {id: 'b1', category:'Bebida', name:'Coca-Cola 350ml', description:'Refrigerante lata', price: 6.00},
+      {id: 'b2', category:'Bebida', name:'Suco Natural', description:'Suco do dia 300ml', price: 8.00},
+      {id: 'a1', category:'Açaí', name:'Açaí 300ml', description:'Açaí com banana e granola', price: 15.00},
+      {id: 'a2', category:'Açaí', name:'Milkshake Ovomaltine', description:'Milkshake cremoso 400ml', price: 17.00}
+    ];
+
+    /* ========= Estado do carrinho ========= */
+    const CART_KEY = 'fumaça_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+
+    /* util: formatar preço */
+    const money = v => v.toFixed(2).replace('.',',');
+
+    /* ========= Render de produtos ========= */
+    const productsGrid = document.getElementById('products-grid');
+    const announce = document.getElementById('announce');
+
+    function createProductCard(product){
+      const div = document.createElement('article');
+      div.className = 'product card';
+      div.setAttribute('role','article');
+      div.innerHTML = `
+        <div class="img" aria-hidden="true">
+          <!-- simple SVG placeholder com o nome do produto -->
+          <svg width="100%" height="100%" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="100%" height="100%" fill="#f3f3f3"/>
+            <text x="50%" y="50%" fill="#999" font-size="20" text-anchor="middle" dominant-baseline="middle">${escapeHtml(product.name)}</text>
+          </svg>
+        </div>
+        <h3>${escapeHtml(product.name)}</h3>
+        <p>${escapeHtml(product.description)}</p>
+        <div class="price">R$ ${money(product.price)}</div>
+        <button data-id="${product.id}" aria-label="Adicionar ${escapeHtml(product.name)} ao carrinho">Adicionar</button>
+      `;
+      return div;
     }
 
-    // Simulação de envio de formulário
-    document.getElementById("formContato").addEventListener("submit", function(e){
-      e.preventDefault();
-      alert("Mensagem enviada com sucesso! 🎉 Obrigado pelo contato, logo retorno.");
-      this.reset();
+    function renderProducts(filter='all'){
+      productsGrid.innerHTML = '';
+      const list = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
+      if(list.length === 0){
+        productsGrid.innerHTML = '<p style="color:var(--muted)">Nenhum item nesta categoria.</p>';
+        announce.textContent = `${list.length} itens encontrados`;
+        return;
+      }
+      list.forEach(p => productsGrid.appendChild(createProductCard(p)));
+      announce.textContent = `${list.length} itens carregados`;
+    }
+
+    /* ========= Eventos: filtro e adicionar ========= */
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if(!btn) return;
+
+      // filtro
+      if(btn.classList.contains('filter-btn')){
+        const filter = btn.dataset.filter;
+        renderProducts(filter === 'all' ? 'all' : filter);
+        document.querySelectorAll('.filter-btn').forEach(b => b.disabled = false);
+        btn.disabled = true;
+      }
+
+      // add ao carrinho
+      if(btn.dataset.id){
+        const id = btn.dataset.id;
+        addToCart(id, 1);
+      }
     });
+
+    /* ========= Carrinho ========= */
+    const cartCount = document.getElementById('cart-count');
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartPanel = document.getElementById('cart-panel');
+    const openCartBtn = document.getElementById('open-cart');
+    const cartTotalEl = document.getElementById('cart-total');
+    const clearCartBtn = document.getElementById('clear-cart');
+    const checkoutBtn = document.getElementById('checkout');
+
+    function saveCart(){
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function addToCart(id, qty = 1){
+      const product = PRODUCTS.find(p => p.id === id);
+      if(!product) return;
+      const existing = cart.find(i => i.id === id);
+      if(existing) existing.qty += qty;
+      else cart.push({id, qty, price: product.price, name: product.name});
+      saveCart();
+      renderCart();
+      announce.textContent = `${product.name} adicionado ao carrinho`;
+    }
+
+    function removeFromCart(id){
+      cart = cart.filter(i => i.id !== id);
+      saveCart();
+      renderCart();
+    }
+
+    function changeQty(id, delta){
+      const it = cart.find(i => i.id === id);
+      if(!it) return;
+      it.qty = Math.max(1, it.qty + delta);
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart(){
+      cart = [];
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart(){
+      // count
+      const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+      cartCount.textContent = totalItems;
+      cartCount.setAttribute('aria-hidden','false');
+
+      // items
+      cartItemsEl.innerHTML = '';
+      if(cart.length === 0){
+        cartItemsEl.innerHTML = '<p style="color:var(--muted)">Carrinho vazio</p>';
+      } else {
+        cart.forEach(i => {
+          const row = document.createElement('div');
+          row.className = 'cart-item';
+          row.innerHTML = `
+            <div style="flex:1">
+              <strong>${escapeHtml(i.name)}</strong>
+              <div class="meta">R$ ${money(i.price)} • x${i.qty}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+              <div>
+                <button data-action="inc" data-id="${i.id}" aria-label="Aumentar quantidade">+</button>
+                <button data-action="dec" data-id="${i.id}" aria-label="Diminuir quantidade">−</button>
+              </div>
+              <button data-action="remove" data-id="${i.id}" aria-label="Remover item">Remover</button>
+            </div>
+          `;
+          cartItemsEl.appendChild(row);
+        });
+      }
+
+      // total
+      const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+      cartTotalEl.textContent = money(total);
+
+      // wire up cart action buttons (delegation)
+      cartItemsEl.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', (ev) => {
+          const id = ev.currentTarget.dataset.id;
+          const action = ev.currentTarget.dataset.action;
+          if(action === 'remove') removeFromCart(id);
+          if(action === 'inc') changeQty(id, 1);
+          if(action === 'dec') changeQty(id, -1);
+        });
+      });
+    }
+
+    // cart open/close
+    openCartBtn.addEventListener('click', () => {
+      const shown = cartPanel.getAttribute('aria-hidden') === 'false';
+      if(shown){
+        cartPanel.setAttribute('aria-hidden','true');
+        cartPanel.hidden = true;
+        openCartBtn.setAttribute('aria-expanded','false');
+      } else {
+        cartPanel.hidden = false;
+        cartPanel.setAttribute('aria-hidden','false');
+        openCartBtn.setAttribute('aria-expanded','true');
+      }
+    });
+
+    clearCartBtn.addEventListener('click', () => clearCart());
+
+    checkoutBtn.addEventListener('click', () => {
+      // placeholder de checkout
+      if(cart.length === 0){
+        announce.textContent = 'Carrinho vazio.';
+        return;
+      }
+      // Em produção, aqui você chamaria uma API para criar pedido
+      announce.textContent = 'Pedido enviado — interface de checkout não implementada nesta demo.';
+      console.log('Pedido (simulação):', cart);
+      // opcional: limpar
+      // clearCart();
+    });
+
+    /* ========= Inicialização ========= */
+    function init(){
+      // preencher ano no footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // render produtos todos
+      renderProducts('all');
+
+      // render carrinho salvo
+      renderCart();
+
+      // set default filter button disabled
+      document.querySelectorAll('.filter-btn').forEach(b => { if(b.dataset.filter === 'all') b.disabled = true; });
+
+      // accessible escape: fechar painel com ESC
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape'){
+          cartPanel.hidden = true;
+          cartPanel.setAttribute('aria-hidden','true');
+          openCartBtn.setAttribute('aria-expanded','false');
+        }
+      });
+    }
+
+    // simples proteção contra XSS ao injetar texto
+    function escapeHtml(s = '') {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Run
+    init();
   </script>
 </body>
 </html>
