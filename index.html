@@ -184,238 +184,344 @@
             </button>
           </li>
         </ul>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pastelaria do Fumaça — Lanches & Delivery</title>
+  <meta name="description" content="Pastelaria do Fumaça — Pastéis, hambúrgueres, açaí e bebidas. Delivery em Guarujá. Ligue 13 99603-9919." />
+  <link rel="canonical" href="https://lanches-do-fumaca.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pastelaria do Fumaça — Lanches & Delivery">
+  <meta property="og:description" content="Pastéis, hambúrgueres, açaí e bebidas. Delivery em Guarujá. Ligue 13 99603-9919.">
+  <meta property="og:url" content="https://lanches-do-fumaca.vercel.app/">
+  <!-- troque pela imagem real se tiver -->
+  <meta property="og:image" content="/images/og-image.jpg">
+
+  <!-- LocalBusiness structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FoodEstablishment",
+    "name":"Pastelaria do Fumaça",
+    "telephone":"+55 13 99603-9919",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"R. Luís Custódio do Vale, 725",
+      "addressLocality":"Guarujá",
+      "addressRegion":"SP",
+      "postalCode":"11444-680",
+      "addressCountry":"BR"
+    },
+    "url":"https://lanches-do-fumaca.vercel.app/"
+  }
+  </script>
+
+  <style>
+    /* ---------- Variables & reset ---------- */
+    :root{
+      --brand:#a61c00;    /* vermelho do tema */
+      --brand-2:#c34a18; /* gradiente */
+      --accent:#ffb84d;
+      --bg:#fff;
+      --muted:#6c6c6c;
+      --card-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    img{max-width:100%;height:auto;display:block}
+
+    /* skip link */
+    .skip {position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{left:8px;top:8px;width:auto;height:auto;padding:8px 12px;background:#000;color:#fff;border-radius:4px;z-index:9999}
+
+    /* ---------- Header ---------- */
+    header{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;padding:14px 0;border-bottom:4px solid rgba(0,0,0,0.06)}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{margin:0;font-size:1.1rem;letter-spacing:0.2px}
+    nav ul{list-style:none;padding:0;margin:0;display:flex;gap:10px;align-items:center}
+    nav a{padding:8px 10px;border-radius:8px;background:transparent;color:rgba(255,255,255,0.95)}
+    nav a[aria-current="page"]{background:rgba(255,255,255,0.12)}
+
+    /* ---------- Hero ---------- */
+    main{padding:20px 0}
+    .hero{display:grid;gap:12px;grid-template-columns:1fr;align-items:start}
+    @media(min-width:880px){ .hero{grid-template-columns:1fr 360px} }
+
+    .card{background:#fff;border-radius:12px;padding:14px;box-shadow:var(--card-shadow)}
+    .hero h2{margin:0;font-size:1.4rem}
+    .meta{color:var(--muted);font-size:0.95rem;margin-top:8px}
+
+    .cta{
+      display:inline-block;
+      margin-top:12px;
+      padding:10px 14px;
+      background:#fff;color:var(--brand);
+      border-radius:8px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,0.06)
+    }
+
+    /* ---------- Controls & products ---------- */
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+    .controls button{padding:8px 12px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer}
+    .controls button[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+    .products-grid{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+    @media(min-width:700px){ .products-grid{grid-template-columns:repeat(3,1fr)} }
+    @media(min-width:1000px){ .products-grid{grid-template-columns:repeat(4,1fr)} }
+
+    .product{
+      border-radius:10px;padding:10px;border:1px solid #f3f3f3;background:#fff;display:flex;flex-direction:column;height:100%;
+    }
+    .product .thumb{height:130px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#f5f5f5;margin-bottom:8px}
+    .product h3{margin:0;font-size:1rem}
+    .product p{margin:6px 0 0 0;color:var(--muted);font-size:0.9rem}
+    .product .price{font-weight:700;margin-top:auto}
+    .product button{margin-top:10px;padding:8px 10px;border-radius:8px;border:0;background:var(--brand);color:#fff;cursor:pointer}
+
+    /* ---------- Cart floating ---------- */
+    .cart-fab{position:fixed;right:18px;bottom:18px;background:var(--brand);color:#fff;border-radius:999px;padding:12px 16px;box-shadow:0 12px 30px rgba(0,0,0,0.18);z-index:1000;display:flex;gap:8px;align-items:center}
+    .cart-count{background:var(--accent);color:#000;padding:4px 8px;border-radius:999px;font-weight:700}
+
+    .cart-panel{position:fixed;right:18px;bottom:78px;width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:12px;box-shadow:0 20px 40px rgba(0,0,0,0.18);z-index:1000}
+    .cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f2}
+    .cart-actions{display:flex;gap:8px;justify-content:space-between;margin-top:12px}
+
+    /* ---------- Footer ---------- */
+    footer{padding:18px 0;margin-top:20px;border-top:1px solid #eee;color:var(--muted)}
+    small.block{display:block;margin-top:6px}
+
+    /* ---------- tiny accessibility helpers ---------- */
+    [aria-live] {position:relative}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+
+  <header role="banner">
+    <div class="container top">
+      <div class="brand" aria-hidden="false">
+        <!-- logo simples (inline) -->
+        <svg width="46" height="46" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <rect rx="10" width="64" height="64" fill="rgba(255,255,255,0.06)"></rect>
+          <g fill="#fff">
+            <path d="M12 44c3-3 10-4 12-12 2-8 0-14 10-14 6 0 12 6 12 12 0 10-10 12-12 18-1 3 0 6-6 6s-16-7-16-10z"></path>
+          </g>
+        </svg>
+        <div>
+          <h1 style="margin:0;font-size:1rem;color:#fff">Pastelaria do Fumaça</h1>
+          <div style="font-size:0.86rem;color:rgba(255,255,255,0.92)">Delivery • Guarujá - SP</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="#inicio" aria-current="page">Início</a></li>
+          <li><a href="#pastel">Pastel</a></li>
+          <li><a href="#hamburguer">Hambúrguer</a></li>
+          <li><a href="#bebidas">Bebidas</a></li>
+          <li><a href="#acai">Açaí</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <main id="main" class="container" role="main">
     <section class="hero" aria-label="Informações do estabelecimento">
-      <div class="card hero-info">
-        <h1>BEM-VINDO À PASTELARIA DO FUMAÇA!</h1>
-        <p class="meta">Aberto segunda a sexta 18:00 às 01:30 — Final de semana 19:00 às 02:00</p>
+      <div class="card">
+        <h2 id="inicio">BEM-VINDO À PASTELARIA DO FUMAÇA!</h2>
+        <p class="meta">Horário: Seg–Sex 18:00–01:30 • Final de semana 19:00–02:00</p>
         <p class="meta">Telefone: <a href="tel:+5513996039919">13 99603-9919</a></p>
-        <p class="meta">Endereço: R. Luís Custódio do Vale, 725 - Guarujá - SP</p>
+        <p class="meta">Endereço: R. Luís Custódio do Vale, 725 — Guarujá - SP</p>
 
-        <div style="margin-top:12px">
-          <a href="#products" class="card" style="display:inline-block;background:var(--brand);color:#fff;padding:10px 14px;border-radius:8px">Peça agora</a>
-        </div>
-
-        <div style="margin-top:14px">
-          <strong>Tempo estimado de entrega:</strong>
-          <div class="meta">30 a 60 min</div>
-        </div>
+        <a class="cta" href="#products" title="Peça agora">Peça agora</a>
       </div>
 
-      <aside class="card" aria-label="Horário e informações rápidas">
-        <h2 style="margin:0 0 8px 0">Informações rápidas</h2>
-        <p class="meta">Atendimento rápido — peça pelo telefone ou online. Verifique horário de fechamento no final de semana.</p>
-        <small class="block">Formas de pagamento: Dinheiro, Cartão (no local) — integrar online depois.</small>
+      <aside class="card" aria-label="Informações rápidas">
+        <strong>Atendimento</strong>
+        <p class="meta">Peça pelo site ou via telefone/WhatsApp. Tempo estimado: 30–60 min.</p>
       </aside>
     </section>
 
-    <!-- ======= CONTROLES E PRODUTOS ======= -->
+    <!-- CONTROLES E PRODUTOS -->
     <section id="products" aria-labelledby="produtos-title" style="margin-top:18px">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <h2 id="produtos-title">Cardápio</h2>
-        <div role="status" aria-live="polite" id="announce" style="font-size:0.9rem;color:var(--muted)"> </div>
+        <div id="announce" aria-live="polite" style="color:var(--muted);font-size:0.95rem"></div>
       </div>
 
       <div class="controls" role="toolbar" aria-label="Filtrar categorias">
-        <button data-filter="all" class="filter-btn">Todos</button>
-        <button data-filter="Pastel" class="filter-btn">Pastel</button>
-        <button data-filter="Hambúrguer" class="filter-btn">Hambúrguer</button>
-        <button data-filter="Bebida" class="filter-btn">Sucos & Refrigerantes</button>
-        <button data-filter="Açaí" class="filter-btn">Açaí & Milk-Shake</button>
+        <button class="filter" data-filter="all" aria-pressed="true">Todos</button>
+        <button class="filter" data-filter="Pastel" aria-pressed="false">Pastel</button>
+        <button class="filter" data-filter="Hambúrguer" aria-pressed="false">Hambúrguer</button>
+        <button class="filter" data-filter="Bebida" aria-pressed="false">Bebidas</button>
+        <button class="filter" data-filter="Açaí" aria-pressed="false">Açaí</button>
       </div>
 
-      <div class="products-grid" id="products-grid" aria-live="polite" aria-atomic="true">
-        <!-- Produtos injetados por JS -->
-      </div>
+      <div class="products-grid" id="products-grid" aria-live="polite"></div>
     </section>
 
-    <footer class="container" role="contentinfo">
-      <div class="card" style="margin-top:14px">
+    <footer role="contentinfo" style="margin-top:18px">
+      <div class="card">
         <strong>Contato</strong>
         <small class="block">Telefone: <a href="tel:+5513996039919">13 99603-9919</a></small>
-        <small class="block">Endereço: R. Luís Custódio do Vale, 725 - Guarujá - SP</small>
+        <small class="block">Endereço: R. Luís Custódio do Vale, 725 — Guarujá - SP</small>
         <small class="block">Horário: Seg–Sex 18:00–01:30 • Sáb–Dom 19:00–02:00</small>
       </div>
 
       <div style="margin-top:10px;color:var(--muted);font-size:0.9rem">
-        © <span id="year"></span> Pastelaria do Fumaça — Desenvolvido para entrega rápida.
+        © <span id="year"></span> Pastelaria do Fumaça
       </div>
     </footer>
   </main>
 
-  <!-- Cart panel (inicialmente oculto) -->
-  <aside id="cart-panel" class="cart-panel" aria-hidden="true" hidden>
+  <!-- FAB do carrinho -->
+  <button id="open-cart" class="cart-fab" aria-controls="cart-panel" aria-expanded="false" title="Abrir carrinho">
+    Carrinho <span id="cart-count" class="cart-count">0</span>
+  </button>
+
+  <!-- Painel do carrinho -->
+  <div id="cart-panel" class="cart-panel" role="dialog" aria-modal="false" aria-hidden="true" hidden>
     <h3>Carrinho</h3>
-    <div class="cart-items" id="cart-items" aria-live="polite"></div>
+    <div id="cart-items" style="max-height:260px;overflow:auto;margin-top:8px"></div>
     <div class="cart-actions">
-      <div><strong>Total:</strong> R$ <span id="cart-total">0.00</span></div>
+      <div><strong>Total R$</strong> <span id="cart-total">0,00</span></div>
       <div style="display:flex;gap:8px">
-        <button id="clear-cart" style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;background:#fff">Limpar</button>
-        <button id="checkout" style="padding:8px 12px;border-radius:8px;background:var(--brand);color:#fff">Finalizar</button>
+        <button id="clear-cart" style="padding:8px;border-radius:8px;border:1px solid #ddd;background:#fff">Limpar</button>
+        <button id="checkout" style="padding:8px 10px;border-radius:8px;background:var(--brand);color:#fff">Finalizar</button>
       </div>
     </div>
-  </aside>
+  </div>
 
   <script>
-    /* ========= Dados iniciais - substituir por backend quando existir ========= */
+    /* ======= Dados iniciais (substitua por sua fonte quando tiver backend) ======= */
     const PRODUCTS = [
-      {id: 'p1', category:'Pastel', name:'Pastel de Carne', description:'Carne moída temperada', price: 8.50},
-      {id: 'p2', category:'Pastel', name:'Pastel de Queijo', description:'Queijo muçarela', price: 7.50},
-      {id: 'h1', category:'Hambúrguer', name:'X-Burger Tradicional', description:'Pão, hambúrguer 150g, queijo, alface', price: 18.00},
-      {id: 'h2', category:'Hambúrguer', name:'X-Bacon', description:'Com bacon crocante', price: 22.00},
-      {id: 'b1', category:'Bebida', name:'Coca-Cola 350ml', description:'Refrigerante lata', price: 6.00},
-      {id: 'b2', category:'Bebida', name:'Suco Natural', description:'Suco do dia 300ml', price: 8.00},
-      {id: 'a1', category:'Açaí', name:'Açaí 300ml', description:'Açaí com banana e granola', price: 15.00},
-      {id: 'a2', category:'Açaí', name:'Milkshake Ovomaltine', description:'Milkshake cremoso 400ml', price: 17.00}
+      {id:'p1', category:'Pastel', name:'Pastel de Carne', desc:'Carne moída temperada', price:8.50},
+      {id:'p2', category:'Pastel', name:'Pastel de Queijo', desc:'Queijo muçarela', price:7.50},
+      {id:'h1', category:'Hambúrguer', name:'X-Burger', desc:'Hambúrguer tradicional', price:18.00},
+      {id:'h2', category:'Hambúrguer', name:'X-Bacon', desc:'Com bacon crocante', price:22.00},
+      {id:'b1', category:'Bebida', name:'Coca-Cola Lata', desc:'350ml', price:6.00},
+      {id:'b2', category:'Bebida', name:'Suco Natural', desc:'300ml', price:8.00},
+      {id:'a1', category:'Açaí', name:'Açaí 300ml', desc:'Com banana e granola', price:15.00},
+      {id:'a2', category:'Açaí', name:'Milkshake Ovomaltine', desc:'400ml', price:17.00}
     ];
 
-    /* ========= Estado do carrinho ========= */
+    /* ======= Estado do carrinho ======= */
     const CART_KEY = 'fumaça_cart_v1';
     let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
 
-    /* util: formatar preço */
-    const money = v => v.toFixed(2).replace('.',',');
-
-    /* ========= Render de produtos ========= */
     const productsGrid = document.getElementById('products-grid');
     const announce = document.getElementById('announce');
+    const cartCountEl = document.getElementById('cart-count');
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    const cartPanel = document.getElementById('cart-panel');
+    const openCartBtn = document.getElementById('open-cart');
 
-    function createProductCard(product){
-      const div = document.createElement('article');
-      div.className = 'product card';
-      div.setAttribute('role','article');
-      div.innerHTML = `
-        <div class="img" aria-hidden="true">
-          <!-- simple SVG placeholder com o nome do produto -->
-          <svg width="100%" height="100%" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <rect width="100%" height="100%" fill="#f3f3f3"/>
-            <text x="50%" y="50%" fill="#999" font-size="20" text-anchor="middle" dominant-baseline="middle">${escapeHtml(product.name)}</text>
-          </svg>
-        </div>
-        <h3>${escapeHtml(product.name)}</h3>
-        <p>${escapeHtml(product.description)}</p>
-        <div class="price">R$ ${money(product.price)}</div>
-        <button data-id="${product.id}" aria-label="Adicionar ${escapeHtml(product.name)} ao carrinho">Adicionar</button>
-      `;
-      return div;
-    }
+    function money(v){ return v.toFixed(2).replace('.',','); }
 
+    /* render produtos */
     function renderProducts(filter='all'){
       productsGrid.innerHTML = '';
       const list = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
       if(list.length === 0){
         productsGrid.innerHTML = '<p style="color:var(--muted)">Nenhum item nesta categoria.</p>';
-        announce.textContent = `${list.length} itens encontrados`;
+        announce.textContent = '0 itens encontrados';
         return;
       }
-      list.forEach(p => productsGrid.appendChild(createProductCard(p)));
+      list.forEach(p => {
+        const el = document.createElement('article');
+        el.className = 'product';
+        el.innerHTML = `
+          <div class="thumb" aria-hidden="true">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" fill="#f5f5f5"></rect>
+              <text x="50%" y="50%" fill="#999" font-size="18" text-anchor="middle" dominant-baseline="middle">${escapeHtml(p.name)}</text>
+            </svg>
+          </div>
+          <h3>${escapeHtml(p.name)}</h3>
+          <p>${escapeHtml(p.desc)}</p>
+          <div class="price">R$ ${money(p.price)}</div>
+          <button data-id="${p.id}" aria-label="Adicionar ${escapeHtml(p.name)} ao carrinho">Adicionar</button>
+        `;
+        productsGrid.appendChild(el);
+      });
       announce.textContent = `${list.length} itens carregados`;
     }
 
-    /* ========= Eventos: filtro e adicionar ========= */
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('button');
-      if(!btn) return;
+    /* escape básico */
+    function escapeHtml(s=''){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-      // filtro
-      if(btn.classList.contains('filter-btn')){
-        const filter = btn.dataset.filter;
-        renderProducts(filter === 'all' ? 'all' : filter);
-        document.querySelectorAll('.filter-btn').forEach(b => b.disabled = false);
-        btn.disabled = true;
-      }
-
-      // add ao carrinho
-      if(btn.dataset.id){
-        const id = btn.dataset.id;
-        addToCart(id, 1);
-      }
+    /* filtros */
+    document.querySelectorAll('.filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach(b => b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        const f = btn.dataset.filter;
+        renderProducts(f === 'all' ? 'all' : f);
+      });
     });
 
-    /* ========= Carrinho ========= */
-    const cartCount = document.getElementById('cart-count');
-    const cartItemsEl = document.getElementById('cart-items');
-    const cartPanel = document.getElementById('cart-panel');
-    const openCartBtn = document.getElementById('open-cart');
-    const cartTotalEl = document.getElementById('cart-total');
-    const clearCartBtn = document.getElementById('clear-cart');
-    const checkoutBtn = document.getElementById('checkout');
+    /* adicionar ao carrinho via delegação */
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-id]');
+      if(!btn) return;
+      const id = btn.dataset.id;
+      addToCart(id,1);
+    });
 
-    function saveCart(){
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    /* ======= Carrinho: lógica e render ======= */
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function addToCart(id, qty=1){
+      const prod = PRODUCTS.find(p => p.id === id);
+      if(!prod) return;
+      const inCart = cart.find(i => i.id === id);
+      if(inCart) inCart.qty += qty; else cart.push({id, name:prod.name, price:prod.price, qty});
+      saveCart(); renderCart();
+      announce.textContent = `${prod.name} adicionado ao carrinho`;
     }
-
-    function addToCart(id, qty = 1){
-      const product = PRODUCTS.find(p => p.id === id);
-      if(!product) return;
-      const existing = cart.find(i => i.id === id);
-      if(existing) existing.qty += qty;
-      else cart.push({id, qty, price: product.price, name: product.name});
-      saveCart();
-      renderCart();
-      announce.textContent = `${product.name} adicionado ao carrinho`;
-    }
-
-    function removeFromCart(id){
-      cart = cart.filter(i => i.id !== id);
-      saveCart();
-      renderCart();
-    }
-
+    function removeFromCart(id){ cart = cart.filter(i=>i.id!==id); saveCart(); renderCart(); }
     function changeQty(id, delta){
-      const it = cart.find(i => i.id === id);
-      if(!it) return;
-      it.qty = Math.max(1, it.qty + delta);
-      saveCart();
-      renderCart();
+      const it = cart.find(i=>i.id===id); if(!it) return; it.qty = Math.max(1,it.qty+delta); saveCart(); renderCart();
     }
-
-    function clearCart(){
-      cart = [];
-      saveCart();
-      renderCart();
-    }
+    function clearCart(){ cart = []; saveCart(); renderCart(); }
 
     function renderCart(){
-      // count
-      const totalItems = cart.reduce((s,i) => s + i.qty, 0);
-      cartCount.textContent = totalItems;
-      cartCount.setAttribute('aria-hidden','false');
-
-      // items
+      const totalItems = cart.reduce((s,i)=>s+i.qty,0);
+      cartCountEl.textContent = totalItems;
       cartItemsEl.innerHTML = '';
-      if(cart.length === 0){
-        cartItemsEl.innerHTML = '<p style="color:var(--muted)">Carrinho vazio</p>';
-      } else {
+      if(cart.length === 0){ cartItemsEl.innerHTML = '<p style="color:var(--muted)">Carrinho vazio</p>'; }
+      else {
         cart.forEach(i => {
           const row = document.createElement('div');
           row.className = 'cart-item';
           row.innerHTML = `
-            <div style="flex:1">
+            <div>
               <strong>${escapeHtml(i.name)}</strong>
-              <div class="meta">R$ ${money(i.price)} • x${i.qty}</div>
+              <div style="color:var(--muted)">R$ ${money(i.price)} • x${i.qty}</div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-              <div>
-                <button data-action="inc" data-id="${i.id}" aria-label="Aumentar quantidade">+</button>
-                <button data-action="dec" data-id="${i.id}" aria-label="Diminuir quantidade">−</button>
+            <div>
+              <div style="display:flex;gap:6px;justify-content:flex-end">
+                <button data-action="dec" data-id="${i.id}" aria-label="Diminuir">−</button>
+                <button data-action="inc" data-id="${i.id}" aria-label="Aumentar">+</button>
               </div>
-              <button data-action="remove" data-id="${i.id}" aria-label="Remover item">Remover</button>
+              <div style="text-align:right;margin-top:6px">
+                <button data-action="remove" data-id="${i.id}" aria-label="Remover">Remover</button>
+              </div>
             </div>
           `;
           cartItemsEl.appendChild(row);
         });
       }
-
-      // total
-      const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+      const total = cart.reduce((s,i)=>s + i.price * i.qty, 0);
       cartTotalEl.textContent = money(total);
 
-      // wire up cart action buttons (delegation)
+      // actions inside cart
       cartItemsEl.querySelectorAll('button').forEach(b => {
         b.addEventListener('click', (ev) => {
           const id = ev.currentTarget.dataset.id;
@@ -427,71 +533,41 @@
       });
     }
 
-    // cart open/close
+    /* abrir/fechar painel do carrinho */
     openCartBtn.addEventListener('click', () => {
-      const shown = cartPanel.getAttribute('aria-hidden') === 'false';
-      if(shown){
-        cartPanel.setAttribute('aria-hidden','true');
-        cartPanel.hidden = true;
-        openCartBtn.setAttribute('aria-expanded','false');
+      const hidden = cartPanel.getAttribute('aria-hidden') === 'true' || cartPanel.hidden;
+      if(hidden){
+        cartPanel.hidden = false; cartPanel.setAttribute('aria-hidden','false'); openCartBtn.setAttribute('aria-expanded','true');
       } else {
-        cartPanel.hidden = false;
-        cartPanel.setAttribute('aria-hidden','false');
-        openCartBtn.setAttribute('aria-expanded','true');
+        cartPanel.hidden = true; cartPanel.setAttribute('aria-hidden','true'); openCartBtn.setAttribute('aria-expanded','false');
       }
     });
 
-    clearCartBtn.addEventListener('click', () => clearCart());
-
-    checkoutBtn.addEventListener('click', () => {
-      // placeholder de checkout
-      if(cart.length === 0){
-        announce.textContent = 'Carrinho vazio.';
-        return;
-      }
-      // Em produção, aqui você chamaria uma API para criar pedido
-      announce.textContent = 'Pedido enviado — interface de checkout não implementada nesta demo.';
-      console.log('Pedido (simulação):', cart);
-      // opcional: limpar
-      // clearCart();
+    document.getElementById('clear-cart').addEventListener('click', clearCart);
+    document.getElementById('checkout').addEventListener('click', () => {
+      if(cart.length === 0){ announce.textContent = 'Carrinho vazio.'; return; }
+      // aqui você pode implementar: gerar link WhatsApp com texto ou chamar API
+      // Exemplo simples: abrir WhatsApp com mensagem pronta (telefone já do estabelecimento)
+      const phone = '5513996039919'; // formato internacional sem +
+      let text = 'Olá, gostaria de fazer o pedido:%0A';
+      cart.forEach(i => text += `- ${i.qty}x ${i.name} (R$ ${money(i.price)})%0A`);
+      const total = cart.reduce((s,i)=>s + i.price * i.qty, 0);
+      text += `%0ATotal: R$ ${money(total)}%0ANome: %0AEndereço: %0AObservações:`;
+      const waUrl = `https://wa.me/${phone}?text=${text}`;
+      window.open(waUrl, '_blank');
     });
 
-    /* ========= Inicialização ========= */
+    /* ======= Inicialização ======= */
     function init(){
-      // preencher ano no footer
       document.getElementById('year').textContent = new Date().getFullYear();
-
-      // render produtos todos
       renderProducts('all');
-
-      // render carrinho salvo
       renderCart();
-
-      // set default filter button disabled
-      document.querySelectorAll('.filter-btn').forEach(b => { if(b.dataset.filter === 'all') b.disabled = true; });
-
-      // accessible escape: fechar painel com ESC
-      document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape'){
-          cartPanel.hidden = true;
-          cartPanel.setAttribute('aria-hidden','true');
-          openCartBtn.setAttribute('aria-expanded','false');
-        }
-      });
+      // fechar painel com ESC
+      document.addEventListener('keydown', e => { if(e.key === 'Escape'){ cartPanel.hidden = true; cartPanel.setAttribute('aria-hidden','true'); openCartBtn.setAttribute('aria-expanded','false'); } });
     }
 
-    // simples proteção contra XSS ao injetar texto
-    function escapeHtml(s = '') {
-      return String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    // Run
     init();
   </script>
 </body>
-</html>
+</html>      
+      
